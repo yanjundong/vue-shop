@@ -39,7 +39,7 @@
         <el-table-column label="操作" width="180px">
           <template v-slot="scope">
             <el-tooltip effect="dark" content="编辑" placement="top" :enterable="false">
-              <el-button type="primary" size="mini" icon="el-icon-edit"></el-button>
+              <el-button type="primary" size="mini" icon="el-icon-edit" @click="editUser(scope.row)"></el-button>
             </el-tooltip>
             <el-tooltip effect="dark" content="删除" placement="top" :enterable="false">
               <el-button type="danger" size="mini" icon="el-icon-delete"></el-button>
@@ -63,28 +63,13 @@
     </el-card>
 
     <!--添加用户的对话框-->
-    <el-dialog title="添加用户" :visible.sync="addUserDialogVisible">
-      <el-form :model="form">
-        <el-form-item label="活动名称" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="活动区域" :label-width="formLabelWidth">
-          <el-select v-model="form.region" placeholder="请选择活动区域">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-          </el-select>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
-      </div>
-    </el-dialog>
-
+    <add-user :addUserDialogVisible="this.addUserDialogVisible" v-on:update:addUserDialogVisible="updateAddUserDialogVisible"></add-user>
   </div>
 </template>
 
 <script>
+
+  import AddUser from "./AddUser";
 
   export default {
     name: "UserList",
@@ -97,19 +82,8 @@
         },
         tableData: [],
         total: 4,
+        //添加用户的对话框是否显示
         addUserDialogVisible: false,
-        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        formLabelWidth: '120px'
-
       }
     },
     created() {
@@ -153,9 +127,17 @@
       /*监听Switch状态变换*/
       changeStatus(row) {
         console.log(row);
+      },
+      updateAddUserDialogVisible(msg) {
+        this.addUserDialogVisible = msg;
+      },
+      //更新用户
+      editUser(row) {
+        console.log(row);
       }
     },
     components: {
+      AddUser
     }
   }
 </script>
