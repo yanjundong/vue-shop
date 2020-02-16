@@ -46,8 +46,12 @@
       SiderMenu
     },
     methods: {
+      //退出登陆
       logout() {
-        console.log('退出');
+        //清空token
+        window.sessionStorage.clear();
+        //跳转到登录页
+        this.$router.replace('/login');
       },
       toggleCollapse() {
         this.isCollapse = !this.isCollapse;
