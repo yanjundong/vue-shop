@@ -25,6 +25,8 @@
 </template>
 
 <script>
+  import {getMenuList} from "@/network/home";
+
   import SiderMenu from "./SiderMenu";
 
   export default {
@@ -38,9 +40,16 @@
       }
     },
     created() {
-      /*模拟数据*/
-      const res = {"data":[{"id":"1","atuthName":"用户管理","order":"1","path":"","child":[{"id":"1-1","atuthName":"用户列表","order":"1","path":"/user","child":[]}]},{"id":"2","atuthName":"权限管理","order":"1","path":"","child":[{"id":"2-1","atuthName":"角色列表","order":"1","path":"/role","child":[]},{"id":"2-2","atuthName":"权限列表","order":"1","path":"","child":[]}]},{"id":"3","atuthName":"商品管理","order":"1","path":"","child":[{"id":"3-1","atuthName":"商品列表","order":"1","path":"","child":[]},{"id":"3-2","atuthName":"分类参数","order":"1","path":"","child":[]},{"id":"3-3","atuthName":"商品分类","order":"1","path":"","child":[]}]},{"id":"4","atuthName":"订单管理","order":"1","path":"","child":[{"id":"3-1","atuthName":"商品列表","order":"1","path":"","child":[]},{"id":"3-2","atuthName":"分类参数","order":"1","path":"","child":[]},{"id":"3-3","atuthName":"商品分类","order":"1","path":"","child":[]}]},{"id":"5","atuthName":"数据统计","order":"1","path":"","child":[{"id":"4-1","atuthName":"数据报表","order":"1","path":"","child":[]}]}],"meta":{"msg":"success","status":"200"}};
-      this.menuList = res.data;
+      const that = this;
+      //网络请求菜单
+      getMenuList().then(res => {
+        if(res.meta.status == 200) {
+          that.menuList = res.data;
+        }else {
+
+        }
+
+      })
     },
     components: {
       SiderMenu

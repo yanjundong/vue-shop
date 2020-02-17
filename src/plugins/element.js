@@ -4,6 +4,7 @@ import {
   Form,
   FormItem,
   Input,
+  MessageBox,
   Message,
   Container,
   Header,
@@ -24,7 +25,8 @@ import {
   Pagination,
   Dialog,
   Select,
-  Option
+  Option,
+  Tree
 } from 'element-ui'
 
 Vue.use(Button)
@@ -51,4 +53,6 @@ Vue.use(Pagination)
 Vue.use(Dialog)
 Vue.use(Select)
 Vue.use(Option)
+Vue.use(Tree)
 Vue.prototype.$message = Message
+Vue.prototype.$messageBox = MessageBox
